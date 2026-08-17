@@ -81,31 +81,6 @@ at or below the requested cap.
 | Thermal handling | Never raises a lower limit | A cap reduced by thermal management is left untouched. |
 | CPU hotplug | Disabled | Both performance cores remain online. |
 
-## Face Unlock Fix in v12
-
-The v11 profile could cause face enrollment to time out during challenge
-generation. Diagnostics showed the Face HAL dying while initializing Trusty IPC:
-
-```text
-FaceGenerateChallengeClient: generateChallenge has timed out
-FaceProvider/default: HAL died
-libproxy_trusty.so: TrustyIpcManager::Initialize()
-```
-
-The failure appeared immediately with v11 enabled and disappeared when the
-module was disabled. The issue was not caused by LSPosed or the blur modules.
-
-| Problematic v11 behavior | v12 correction |
-| --- | --- |
-| CPU7 was forced offline | CPU7 is explicitly restored online at boot. |
-| Only one performance core remained available | Both Cortex-X1 cores remain available. |
-| `system-background` cpuset was restricted to CPUs 0-5 | `system-background` cpuset is no longer modified. |
-| `system-background` uclamp was limited to 50% | It is explicitly restored to `max`. |
-| Foreground tasks were restricted to CPUs 0-5 | Foreground cpuset remains stock. |
-| Dynamic loop repeatedly offlined CPU7 | The loop now enforces frequency caps only. |
-
-These changes preserve access for biometric, secure-world and other critical
-system workloads while retaining most of the battery-saving profile.
 
 ## Installation
 

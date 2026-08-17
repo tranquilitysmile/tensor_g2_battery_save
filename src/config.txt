@@ -1,0 +1,26 @@
+# Tensor G2 Battery First Face Safe v12
+# Frequencies are in kHz. Unsupported values are rounded down safely.
+LITTLE_MAX_FREQ=1598000
+MID_MAX_FREQ=1836000
+BIG_MAX_FREQ=2188000
+
+# Google scheduler is retained for short UI bursts and acceptable 120 Hz fluidity.
+CPU_GOVERNOR=sched_pixel
+
+# Used only if sched_pixel is unavailable and schedutil is selected.
+SCHEDUTIL_RATE_LIMIT_US=10000
+
+# Keep the stock interaction boost. Frequency caps still limit its power cost.
+DISABLE_TOUCH_BOOST=0
+
+# Only ordinary background/restricted apps stay on A55. System, foreground,
+# biometrics and Trusty-facing services retain the stock CPU sets.
+CPUSET_ISOLATION=1
+
+# Check infrequently and only lower limits that PowerHAL raised above our caps.
+DYNAMIC_ENFORCEMENT=1
+ENFORCE_INTERVAL_SEC=180
+
+# Scheduler capacity ceilings only for non-critical background work.
+BACKGROUND_UCLAMP_MAX=35
+DEX2OAT_UCLAMP_MAX=60

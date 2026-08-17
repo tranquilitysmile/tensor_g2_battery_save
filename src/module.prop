@@ -1,0 +1,6 @@
+id=tensor_g2_cpu_opt_v9
+name=Tensor G2 Battery First Face Safe
+version=v12.0
+versionCode=1200
+author=Vladislav / Codex
+description=Face-safe battery profile with capped CPU clusters and app background limits; system-background, Trusty services and both X2 cores remain stock.

@@ -1,0 +1,13 @@
+#!/sbin/sh
+#MAGISK
+
+OIFS=$IFS
+IFS='|'
+for field in $(cmd line); do
+    case "$field" in zip=*) ZIPFILE="${field#*=}" ;; esac
+done
+IFS=$OIFS
+
+[ -z "$ZIPFILE" ] && ZIPFILE="$2"
+[ -z "$ZIPFILE" ] && ZIPFILE="$3"
+exec magisk --install-module "$ZIPFILE"

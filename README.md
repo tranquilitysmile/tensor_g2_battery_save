@@ -7,7 +7,6 @@
 ![Version 12](https://img.shields.io/badge/version-12.0-009688)
 ![Tensor G2](https://img.shields.io/badge/SoC-Google%20Tensor%20G2-4285F4?logo=google&logoColor=white)
 ![Root module](https://img.shields.io/badge/type-root%20module-E53935)
-![Face Unlock safe](https://img.shields.io/badge/Face%20Unlock-safe-43A047)
 
 </div>
 
@@ -25,9 +24,6 @@ The profile gives battery life priority over peak benchmark performance while
 retaining stock interaction boost and Google's scheduler for acceptable UI
 responsiveness and stable high-refresh-rate behavior.
 
-Version 12 also fixes the Face Unlock failure caused by the more aggressive v11
-profile. Critical Android, biometric and Trusty-facing workloads now retain
-their stock CPU access and scheduler capacity.
 
 ## Default Profile
 
@@ -90,11 +86,7 @@ at or below the requested cap.
 3. **Reboot the phone.** A reboot is required to stop any older service script
    and recreate Android's stock task groups.
 4. Check the module log at `opt.log` after boot.
-5. Verify Face Unlock, normal app launches and your preferred refresh-rate mode.
 
-Do not install v12 over a running v11 session and continue without rebooting.
-The old v11 background process can keep reapplying its unsafe settings until the
-device restarts.
 
 ## Configuration
 
@@ -179,9 +171,6 @@ module's 180-second loop corrects limits raised above it by PowerHAL.
 The uninstall script immediately brings CPU7 online and removes the two uclamp
 ceilings where possible. A reboot remains necessary for a complete stock reset.
 
-If Face Unlock ever fails after changing the configuration, first disable the
-module and reboot. Do not experiment with CPU hotplug or restrictions on
-`system-background`, foreground, top-app or Trusty-facing services.
 
 ## Source Layout
 
@@ -210,7 +199,7 @@ src/
 
 | Item | Value |
 | --- | --- |
-| Display name | Tensor G2 Battery First Face Safe |
+| Display name | Tensor G2 Battery  |
 | Module ID | `tensor_g2_cpu_opt_v9` |
 | Version | `v12.0` |
 | Version code | `1200` |
@@ -225,5 +214,3 @@ time. This profile intentionally avoids undervolting, thermal-service bypasses,
 forced CPU hotplug and restrictions on critical system groups.
 
 ---
-
-<div align="center">Battery first, without breaking the secure path that Face Unlock depends on.</div>
